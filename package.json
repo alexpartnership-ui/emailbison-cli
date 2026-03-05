@@ -1,0 +1,50 @@
+{
+  "name": "emailbison-cli",
+  "version": "0.1.0",
+  "description": "CLI and MCP server for the EmailBison cold email platform. Manage campaigns, leads, replies, sender accounts, warmup, and more — from your terminal.",
+  "type": "module",
+  "bin": {
+    "bison": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "emailbison",
+    "cold-email",
+    "outbound",
+    "cli",
+    "mcp",
+    "email-campaigns",
+    "email-automation",
+    "ai-agent"
+  ],
+  "author": "Brandon Charleson",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "commander": "^14.0.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,57 @@
+import { z } from 'zod';
+import type { CommandDefinition } from '../../core/types.js';
+import { executeCommand } from '../../core/handler.js';
+
+export const campaignsScheduleUpdateCommand: CommandDefinition = {
+  name: 'campaigns_schedule-update',
+  group: 'campaigns',
+  subcommand: 'schedule-update',
+  description: 'Update the schedule for a campaign.',
+  examples: ['bison campaigns schedule-update --campaign_id abc123 --start_time "08:00" --end_time "18:00"'],
+  inputSchema: z.object({
+    campaign_id: z.string().describe('Campaign ID'),
+    monday: z.boolean().optional().describe('Enable Monday'),
+    tuesday: z.boolean().optional().describe('Enable Tuesday'),
+    wednesday: z.boolean().optional().describe('Enable Wednesday'),
+    thursday: z.boolean().optional().describe('Enable Thursday'),
+    friday: z.boolean().optional().describe('Enable Friday'),
+    saturday: z.boolean().optional().describe('Enable Saturday'),
+    sunday: z.boolean().optional().describe('Enable Sunday'),
+    start_time: z.string().optional().describe('Start time (e.g. "09:00")'),
+    end_time: z.string().optional().describe('End time (e.g. "17:00")'),
+    timezone: z.string().optional().describe('Timezone (e.g. "America/New_York")'),
+    save_as_template: z.boolean().optional().describe('Save schedule as a reusable template'),
+  }),
+  cliMappings: {
+    options: [
+      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'monday', flags: '--monday', description: 'Enable Monday' },
+      { field: 'tuesday', flags: '--tuesday', description: 'Enable Tuesday' },
+      { field: 'wednesday', flags: '--wednesday', description: 'Enable Wednesday' },
+      { field: 'thursday', flags: '--thursday', description: 'Enable Thursday' },
+      { field: 'friday', flags: '--friday', description: 'Enable Friday' },
+      { field: 'saturday', flags: '--saturday', description: 'Enable Saturday' },
+      { field: 'sunday', flags: '--sunday', description: 'Enable Sunday' },
+      { field: 'start_time', flags: '--start_time <string>', description: 'Start time' },
+      { field: 'end_time', flags: '--end_time <string>', description: 'End time' },
+      { field: 'timezone', flags: '--timezone <string>', description: 'Timezone' },
+      { field: 'save_as_template', flags: '--save_as_template', description: 'Save as template' },
+    ],
+  },
+  endpoint: { method: 'PUT', path: '/api/campaigns/{campaign_id}/schedule' },
+  fieldMappings: {
+    campaign_id: 'path',
+    monday: 'body',
+    tuesday: 'body',
+    wednesday: 'body',
+    thursday: 'body',
+    friday: 'body',
+    saturday: 'body',
+    sunday: 'body',
+    start_time: 'body',
+    end_time: 'body',
+    timezone: 'body',
+    save_as_template: 'body',
+  },
+  handler: (input, client) => executeCommand(campaignsScheduleUpdateCommand, input, client),
+};
