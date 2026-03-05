@@ -45,14 +45,14 @@ Get your API key from your EmailBison dashboard (Settings → Developer API → 
 Pass `--api-key` and `--base-url` as **global** options (before `login`):
 
 ```bash
-bison --api-key '25|abc...' --base-url 'https://send.topoffunnel.com' login
+bison --api-key '25|abc...' --base-url 'https://send.yourinstance.com' login
 ```
 
 Or use environment variables (works with any key format including `|`):
 
 ```bash
 export EMAILBISON_API_KEY='25|abc...'
-export EMAILBISON_BASE_URL='https://send.topoffunnel.com'
+export EMAILBISON_BASE_URL='https://send.yourinstance.com'
 bison login
 ```
 
@@ -79,7 +79,8 @@ The base URL is resolved the same way:
 1. `--base-url` flag
 2. `EMAILBISON_BASE_URL` env var
 3. Stored config
-4. Default: `https://send.topoffunnel.com`
+
+Both values are required — there is no default base URL. Every EmailBison instance has its own URL.
 
 ---
 
@@ -87,7 +88,7 @@ The base URL is resolved the same way:
 
 ```bash
 # Authenticate
-bison login --api-key <key> --base-url https://send.topoffunnel.com
+bison login --api-key <key> --base-url https://send.yourinstance.com
 
 # List campaigns
 bison campaigns list --pretty
@@ -419,7 +420,7 @@ bison mcp
       "args": ["emailbison-cli", "mcp"],
       "env": {
         "EMAILBISON_API_KEY": "your-api-key",
-        "EMAILBISON_BASE_URL": "https://send.topoffunnel.com"
+        "EMAILBISON_BASE_URL": "https://send.yourinstance.com"
       }
     }
   }

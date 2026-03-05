@@ -6,27 +6,30 @@ export interface AuthContext {
   baseUrl: string;
 }
 
-const DEFAULT_BASE_URL = 'https://send.topoffunnel.com';
-
 export function resolveAuth(opts?: { apiKey?: string; baseUrl?: string }): AuthContext {
+  const config = loadConfig();
+
   const apiKey =
     opts?.apiKey ??
     process.env.EMAILBISON_API_KEY ??
-    loadConfig().api_key;
+    config.api_key;
 
   if (!apiKey) {
     throw new AuthError(
-      'No API key found. Provide --api-key, set EMAILBISON_API_KEY, or run "bison login".',
+      'No API key found. Run "bison login" or set EMAILBISON_API_KEY.',
     );
   }
 
   const baseUrl =
     opts?.baseUrl ??
     process.env.EMAILBISON_BASE_URL ??
-    loadConfig().base_url ??
-    DEFAULT_BASE_URL;
+    config.base_url;
 
-  const normalized = baseUrl.replace(/\/+$/, '');
+  if (!baseUrl) {
+    throw new AuthError(
+      'No base URL found. Run "bison login" or set EMAILBISON_BASE_URL.',
+    );
+  }
 
-  return { apiKey, baseUrl: normalized };
+  return { apiKey, baseUrl: baseUrl.replace(/\/+$/, '') };
 }

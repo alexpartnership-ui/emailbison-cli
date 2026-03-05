@@ -73,18 +73,23 @@ function registerLoginCommand(program: Command): void {
       let apiKey = globalOpts.apiKey ?? process.env.EMAILBISON_API_KEY;
       let baseUrl = globalOpts.baseUrl ?? process.env.EMAILBISON_BASE_URL;
 
-      if (!apiKey) {
+      if (!apiKey || !baseUrl) {
         const rl = createInterface({ input: process.stdin, output: process.stderr });
-        apiKey = (await rl.question('EmailBison API key: ')).trim();
+        if (!apiKey) {
+          apiKey = (await rl.question('EmailBison API key: ')).trim();
+        }
         if (!baseUrl) {
-          const inputUrl = (await rl.question('Base URL [https://send.topoffunnel.com]: ')).trim();
-          if (inputUrl) baseUrl = inputUrl;
+          baseUrl = (await rl.question('Base URL (e.g. https://send.yourinstance.com): ')).trim();
         }
         rl.close();
       }
 
       if (!apiKey) {
-        outputError({ error: 'No API key provided.', code: 'VALIDATION_ERROR' }, globalOpts);
+        outputError({ error: 'API key is required.', code: 'VALIDATION_ERROR' }, globalOpts);
+        return;
+      }
+      if (!baseUrl) {
+        outputError({ error: 'Base URL is required.', code: 'VALIDATION_ERROR' }, globalOpts);
         return;
       }
 
