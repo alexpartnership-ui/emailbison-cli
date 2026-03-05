@@ -7,13 +7,13 @@ export const campaignsArchiveCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'archive',
   description: 'Archive a campaign.',
-  examples: ['bison campaigns archive --campaign_id abc123'],
+  examples: ['bison campaigns archive --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID to archive'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID to archive' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID to archive' },
     ],
   },
   endpoint: { method: 'PATCH', path: '/api/campaigns/{campaign_id}/archive' },

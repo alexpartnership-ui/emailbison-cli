@@ -7,13 +7,13 @@ export const tagsDeleteCommand: CommandDefinition = {
   group: 'tags',
   subcommand: 'delete',
   description: 'Delete a tag.',
-  examples: ['bison tags delete --tag_id abc123'],
+  examples: ['bison tags delete --tag-id abc123'],
   inputSchema: z.object({
     tag_id: z.string().describe('Tag ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'tag_id', flags: '--tag_id <string>', description: 'Tag ID' },
+      { field: 'tag_id', flags: '--tag-id <string>', description: 'Tag ID' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/tags/{tag_id}' },

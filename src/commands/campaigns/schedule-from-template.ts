@@ -7,15 +7,15 @@ export const campaignsScheduleFromTemplateCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'schedule-from-template',
   description: 'Create a campaign schedule from an existing template.',
-  examples: ['bison campaigns schedule-from-template --campaign_id abc123 --schedule_id tmpl456'],
+  examples: ['bison campaigns schedule-from-template --campaign-id abc123 --schedule-id tmpl456'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
     schedule_id: z.string().describe('Schedule template ID to use'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
-      { field: 'schedule_id', flags: '--schedule_id <string>', description: 'Schedule template ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
+      { field: 'schedule_id', flags: '--schedule-id <string>', description: 'Schedule template ID' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/campaigns/{campaign_id}/create-schedule-from-template' },

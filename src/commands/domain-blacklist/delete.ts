@@ -7,13 +7,13 @@ export const domainBlacklistDeleteCommand: CommandDefinition = {
   group: 'domain-blacklist',
   subcommand: 'delete',
   description: 'Remove a domain from the blacklist.',
-  examples: ['bison domain-blacklist delete --blacklisted_domain_id abc123'],
+  examples: ['bison domain-blacklist delete --blacklisted-domain_id abc123'],
   inputSchema: z.object({
     blacklisted_domain_id: z.string().describe('Blacklisted domain ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'blacklisted_domain_id', flags: '--blacklisted_domain_id <string>', description: 'Blacklisted domain ID' },
+      { field: 'blacklisted_domain_id', flags: '--blacklisted-domain-id <string>', description: 'Blacklisted domain ID' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/blacklisted-domains/{blacklisted_domain_id}' },

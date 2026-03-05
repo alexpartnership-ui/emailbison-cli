@@ -7,13 +7,13 @@ export const trackingDomainsDeleteCommand: CommandDefinition = {
   group: 'tracking-domains',
   subcommand: 'delete',
   description: 'Delete a custom tracking domain.',
-  examples: ['bison tracking-domains delete --custom_tracking_domain_id abc123'],
+  examples: ['bison tracking-domains delete --custom-tracking_domain_id abc123'],
   inputSchema: z.object({
     custom_tracking_domain_id: z.string().describe('Custom tracking domain ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'custom_tracking_domain_id', flags: '--custom_tracking_domain_id <string>', description: 'Custom tracking domain ID' },
+      { field: 'custom_tracking_domain_id', flags: '--custom-tracking-domain-id <string>', description: 'Custom tracking domain ID' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/custom-tracking-domain/{custom_tracking_domain_id}' },

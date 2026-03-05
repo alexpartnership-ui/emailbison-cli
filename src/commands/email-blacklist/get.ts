@@ -7,13 +7,13 @@ export const emailBlacklistGetCommand: CommandDefinition = {
   group: 'email-blacklist',
   subcommand: 'get',
   description: 'Get a specific blacklisted email by ID.',
-  examples: ['bison email-blacklist get --blacklisted_email_id abc123'],
+  examples: ['bison email-blacklist get --blacklisted-email_id abc123'],
   inputSchema: z.object({
     blacklisted_email_id: z.string().describe('Blacklisted email ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'blacklisted_email_id', flags: '--blacklisted_email_id <string>', description: 'Blacklisted email ID' },
+      { field: 'blacklisted_email_id', flags: '--blacklisted-email-id <string>', description: 'Blacklisted email ID' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/blacklisted-emails/{blacklisted_email_id}' },

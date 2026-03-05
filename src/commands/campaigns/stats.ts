@@ -7,13 +7,13 @@ export const campaignsStatsCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'stats',
   description: 'Get campaign statistics.',
-  examples: ['bison campaigns stats --campaign_id abc123'],
+  examples: ['bison campaigns stats --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/campaigns/{campaign_id}/stats' },

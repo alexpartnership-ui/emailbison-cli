@@ -7,14 +7,14 @@ export const workspacesUpdateCommand: CommandDefinition = {
   group: 'workspaces',
   subcommand: 'update',
   description: 'Update a workspace (v1, deprecated).',
-  examples: ['bison workspaces update --team_id abc123 --name "New Name"'],
+  examples: ['bison workspaces update --team-id abc123 --name "New Name"'],
   inputSchema: z.object({
     team_id: z.string().describe('Team/workspace ID'),
     name: z.string().optional().describe('New workspace name'),
   }),
   cliMappings: {
     options: [
-      { field: 'team_id', flags: '--team_id <string>', description: 'Team/workspace ID' },
+      { field: 'team_id', flags: '--team-id <string>', description: 'Team/workspace ID' },
       { field: 'name', flags: '--name <string>', description: 'New workspace name' },
     ],
   },

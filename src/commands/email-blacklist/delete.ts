@@ -7,13 +7,13 @@ export const emailBlacklistDeleteCommand: CommandDefinition = {
   group: 'email-blacklist',
   subcommand: 'delete',
   description: 'Remove an email from the blacklist.',
-  examples: ['bison email-blacklist delete --blacklisted_email_id abc123'],
+  examples: ['bison email-blacklist delete --blacklisted-email_id abc123'],
   inputSchema: z.object({
     blacklisted_email_id: z.string().describe('Blacklisted email ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'blacklisted_email_id', flags: '--blacklisted_email_id <string>', description: 'Blacklisted email ID' },
+      { field: 'blacklisted_email_id', flags: '--blacklisted-email-id <string>', description: 'Blacklisted email ID' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/blacklisted-emails/{blacklisted_email_id}' },

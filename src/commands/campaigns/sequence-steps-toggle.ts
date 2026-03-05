@@ -7,13 +7,13 @@ export const campaignsSequenceStepsToggleCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'sequence-steps-toggle',
   description: 'Activate or deactivate a sequence step.',
-  examples: ['bison campaigns sequence-steps-toggle --sequence_step_id step123'],
+  examples: ['bison campaigns sequence-steps-toggle --sequence-step_id step123'],
   inputSchema: z.object({
     sequence_step_id: z.string().describe('Sequence step ID to toggle'),
   }),
   cliMappings: {
     options: [
-      { field: 'sequence_step_id', flags: '--sequence_step_id <string>', description: 'Sequence step ID' },
+      { field: 'sequence_step_id', flags: '--sequence-step-id <string>', description: 'Sequence step ID' },
     ],
   },
   endpoint: { method: 'PATCH', path: '/api/campaigns/sequence-steps/{sequence_step_id}/activate-or-deactivate' },

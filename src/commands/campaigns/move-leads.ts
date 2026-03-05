@@ -7,7 +7,7 @@ export const campaignsMoveLeadsCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'move-leads',
   description: 'Move leads from one campaign to another.',
-  examples: ['bison campaigns move-leads --campaign_id abc123 --lead_ids \'["id1"]\' --to_campaign_id xyz789'],
+  examples: ['bison campaigns move-leads --campaign-id abc123 --lead-ids \'["id1"]\' --to-campaign_id xyz789'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Source campaign ID'),
     lead_ids: z.string().describe('JSON array of lead IDs to move'),
@@ -15,9 +15,9 @@ export const campaignsMoveLeadsCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Source campaign ID' },
-      { field: 'lead_ids', flags: '--lead_ids <string>', description: 'JSON array of lead IDs' },
-      { field: 'to_campaign_id', flags: '--to_campaign_id <string>', description: 'Destination campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Source campaign ID' },
+      { field: 'lead_ids', flags: '--lead-ids <string>', description: 'JSON array of lead IDs' },
+      { field: 'to_campaign_id', flags: '--to-campaign-id <string>', description: 'Destination campaign ID' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/campaigns/{campaign_id}/leads/move-to-another-campaign' },

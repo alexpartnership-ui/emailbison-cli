@@ -17,7 +17,7 @@ export const webhooksUpdateCommand: CommandDefinition = {
     options: [
       { field: 'id', flags: '--id <string>', description: 'Webhook URL ID' },
       { field: 'url', flags: '--url <string>', description: 'Webhook endpoint URL' },
-      { field: 'event_types', flags: '--event_types <string>', description: 'JSON string of event types' },
+      { field: 'event_types', flags: '--event-types <string>', description: 'JSON string of event types' },
     ],
   },
   endpoint: { method: 'PUT', path: '/api/webhook-url/{id}' },

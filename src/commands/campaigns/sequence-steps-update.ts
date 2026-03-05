@@ -7,7 +7,7 @@ export const campaignsSequenceStepsUpdateCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'sequence-steps-update',
   description: 'Update a sequence step.',
-  examples: ['bison campaigns sequence-steps-update --sequence_id seq123 --email_subject "New Subject"'],
+  examples: ['bison campaigns sequence-steps-update --sequence-id seq123 --email-subject "New Subject"'],
   inputSchema: z.object({
     sequence_id: z.string().describe('Sequence step ID'),
     email_subject: z.string().optional().describe('Email subject'),
@@ -19,13 +19,13 @@ export const campaignsSequenceStepsUpdateCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'sequence_id', flags: '--sequence_id <string>', description: 'Sequence step ID' },
-      { field: 'email_subject', flags: '--email_subject <string>', description: 'Email subject' },
-      { field: 'email_body', flags: '--email_body <string>', description: 'Email body' },
-      { field: 'wait_in_days', flags: '--wait_in_days <number>', description: 'Wait time in days' },
+      { field: 'sequence_id', flags: '--sequence-id <string>', description: 'Sequence step ID' },
+      { field: 'email_subject', flags: '--email-subject <string>', description: 'Email subject' },
+      { field: 'email_body', flags: '--email-body <string>', description: 'Email body' },
+      { field: 'wait_in_days', flags: '--wait-in-days <number>', description: 'Wait time in days' },
       { field: 'variant', flags: '--variant <string>', description: 'Variant identifier' },
-      { field: 'variant_from_step', flags: '--variant_from_step <string>', description: 'Step to derive variant from' },
-      { field: 'thread_reply', flags: '--thread_reply', description: 'Send as thread reply' },
+      { field: 'variant_from_step', flags: '--variant-from-step <string>', description: 'Step to derive variant from' },
+      { field: 'thread_reply', flags: '--thread-reply', description: 'Send as thread reply' },
     ],
   },
   endpoint: { method: 'PUT', path: '/api/campaigns/sequence-steps/{sequence_id}' },

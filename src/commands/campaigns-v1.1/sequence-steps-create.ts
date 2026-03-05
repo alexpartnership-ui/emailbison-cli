@@ -7,7 +7,7 @@ export const campaignsV11SequenceStepsCreateCommand: CommandDefinition = {
   group: 'campaigns-v1.1',
   subcommand: 'sequence-steps-create',
   description: 'Create sequence steps for a campaign (v1.1).',
-  examples: ['bison campaigns-v1.1 sequence-steps-create --campaign_id abc123 --title "Step 1" --sequence_steps \'[...]\''],
+  examples: ['bison campaigns-v1.1 sequence-steps-create --campaign-id abc123 --title "Step 1" --sequence-steps \'[...]\''],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
     title: z.string().describe('Sequence step title'),
@@ -15,9 +15,9 @@ export const campaignsV11SequenceStepsCreateCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
       { field: 'title', flags: '--title <string>', description: 'Sequence step title' },
-      { field: 'sequence_steps', flags: '--sequence_steps <string>', description: 'JSON string of sequence steps' },
+      { field: 'sequence_steps', flags: '--sequence-steps <string>', description: 'JSON string of sequence steps' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/campaigns/v1.1/{campaign_id}/sequence-steps' },

@@ -7,7 +7,7 @@ export const campaignsV11SequenceStepsUpdateCommand: CommandDefinition = {
   group: 'campaigns-v1.1',
   subcommand: 'sequence-steps-update',
   description: 'Update a sequence step (v1.1).',
-  examples: ['bison campaigns-v1.1 sequence-steps-update --sequence_id abc123 --email_subject "New Subject"'],
+  examples: ['bison campaigns-v1.1 sequence-steps-update --sequence-id abc123 --email-subject "New Subject"'],
   inputSchema: z.object({
     sequence_id: z.string().describe('Sequence step ID'),
     email_subject: z.string().optional().describe('Email subject'),
@@ -19,13 +19,13 @@ export const campaignsV11SequenceStepsUpdateCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'sequence_id', flags: '--sequence_id <string>', description: 'Sequence step ID' },
-      { field: 'email_subject', flags: '--email_subject <string>', description: 'Email subject' },
-      { field: 'email_body', flags: '--email_body <string>', description: 'Email body' },
-      { field: 'wait_in_days', flags: '--wait_in_days <number>', description: 'Wait time in days' },
+      { field: 'sequence_id', flags: '--sequence-id <string>', description: 'Sequence step ID' },
+      { field: 'email_subject', flags: '--email-subject <string>', description: 'Email subject' },
+      { field: 'email_body', flags: '--email-body <string>', description: 'Email body' },
+      { field: 'wait_in_days', flags: '--wait-in-days <number>', description: 'Wait time in days' },
       { field: 'variant', flags: '--variant <string>', description: 'Variant identifier' },
-      { field: 'variant_from_step', flags: '--variant_from_step <string>', description: 'Variant from step reference' },
-      { field: 'thread_reply', flags: '--thread_reply <string>', description: 'Thread reply setting' },
+      { field: 'variant_from_step', flags: '--variant-from-step <string>', description: 'Variant from step reference' },
+      { field: 'thread_reply', flags: '--thread-reply <string>', description: 'Thread reply setting' },
     ],
   },
   endpoint: { method: 'PUT', path: '/api/campaigns/v1.1/sequence-steps/{sequence_id}' },

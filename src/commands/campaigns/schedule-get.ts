@@ -7,13 +7,13 @@ export const campaignsScheduleGetCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'schedule-get',
   description: 'Get the schedule for a campaign.',
-  examples: ['bison campaigns schedule-get --campaign_id abc123'],
+  examples: ['bison campaigns schedule-get --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/campaigns/{campaign_id}/schedule' },

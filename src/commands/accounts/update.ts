@@ -7,7 +7,7 @@ export const accountsUpdateCommand: CommandDefinition = {
   group: 'accounts',
   subcommand: 'update',
   description: 'Update a sender email account.',
-  examples: ['bison accounts update --senderEmailId abc123 --from_name "John Doe"'],
+  examples: ['bison accounts update --senderEmailId abc123 --from-name "John Doe"'],
   inputSchema: z.object({
     senderEmailId: z.string().describe('Sender email account ID'),
     from_name: z.string().optional().describe('Display name for the sender'),
@@ -17,8 +17,8 @@ export const accountsUpdateCommand: CommandDefinition = {
   cliMappings: {
     options: [
       { field: 'senderEmailId', flags: '--senderEmailId <string>', description: 'Sender email account ID' },
-      { field: 'from_name', flags: '--from_name <string>', description: 'Display name for the sender' },
-      { field: 'daily_limit', flags: '--daily_limit <number>', description: 'Daily sending limit' },
+      { field: 'from_name', flags: '--from-name <string>', description: 'Display name for the sender' },
+      { field: 'daily_limit', flags: '--daily-limit <number>', description: 'Daily sending limit' },
       { field: 'signature', flags: '--signature <string>', description: 'Email signature' },
     ],
   },

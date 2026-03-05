@@ -7,7 +7,7 @@ export const usersUpdatePasswordCommand: CommandDefinition = {
   group: 'users',
   subcommand: 'update-password',
   description: 'Update the current user password.',
-  examples: ['bison users update-password --current_password old123 --password new456 --password_confirmation new456'],
+  examples: ['bison users update-password --current-password old123 --password new456 --password-confirmation new456'],
   inputSchema: z.object({
     current_password: z.string().describe('Current password'),
     password: z.string().describe('New password'),
@@ -15,9 +15,9 @@ export const usersUpdatePasswordCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'current_password', flags: '--current_password <string>', description: 'Current password' },
+      { field: 'current_password', flags: '--current-password <string>', description: 'Current password' },
       { field: 'password', flags: '--password <string>', description: 'New password' },
-      { field: 'password_confirmation', flags: '--password_confirmation <string>', description: 'New password confirmation' },
+      { field: 'password_confirmation', flags: '--password-confirmation <string>', description: 'New password confirmation' },
     ],
   },
   endpoint: { method: 'PUT', path: '/api/users/password' },

@@ -7,7 +7,7 @@ export const campaignsScheduleCreateCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'schedule-create',
   description: 'Create a schedule for a campaign.',
-  examples: ['bison campaigns schedule-create --campaign_id abc123 --monday --tuesday --start_time "09:00" --end_time "17:00" --timezone "America/New_York"'],
+  examples: ['bison campaigns schedule-create --campaign-id abc123 --monday --tuesday --start-time "09:00" --end-time "17:00" --timezone "America/New_York"'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
     monday: z.boolean().optional().describe('Enable Monday'),
@@ -24,7 +24,7 @@ export const campaignsScheduleCreateCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
       { field: 'monday', flags: '--monday', description: 'Enable Monday' },
       { field: 'tuesday', flags: '--tuesday', description: 'Enable Tuesday' },
       { field: 'wednesday', flags: '--wednesday', description: 'Enable Wednesday' },
@@ -32,10 +32,10 @@ export const campaignsScheduleCreateCommand: CommandDefinition = {
       { field: 'friday', flags: '--friday', description: 'Enable Friday' },
       { field: 'saturday', flags: '--saturday', description: 'Enable Saturday' },
       { field: 'sunday', flags: '--sunday', description: 'Enable Sunday' },
-      { field: 'start_time', flags: '--start_time <string>', description: 'Start time' },
-      { field: 'end_time', flags: '--end_time <string>', description: 'End time' },
+      { field: 'start_time', flags: '--start-time <string>', description: 'Start time' },
+      { field: 'end_time', flags: '--end-time <string>', description: 'End time' },
       { field: 'timezone', flags: '--timezone <string>', description: 'Timezone' },
-      { field: 'save_as_template', flags: '--save_as_template', description: 'Save as template' },
+      { field: 'save_as_template', flags: '--save-as-template', description: 'Save as template' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/campaigns/{campaign_id}/schedule' },

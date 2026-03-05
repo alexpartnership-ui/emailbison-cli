@@ -1,3 +1,4 @@
+import { createInterface } from 'node:readline/promises';
 import { Command } from 'commander';
 import type { CommandDefinition, GlobalOptions } from '../core/types.js';
 import { resolveAuth } from '../core/auth.js';
@@ -64,21 +65,31 @@ function getGlobalOpts(program: Command): GlobalOptions {
 function registerLoginCommand(program: Command): void {
   program
     .command('login')
-    .description(
-      'Save your API key and base URL to ~/.emailbison/config.json. ' +
-      'Pass --api-key and --base-url as global options before "login".',
-    )
+    .description('Save your API key and base URL to ~/.emailbison/config.json')
     .action(async () => {
       const globalOpts = getGlobalOpts(program);
-      if (!globalOpts.apiKey) {
-        outputError(
-          { error: 'No API key provided. Use: bison --api-key <key> login', code: 'VALIDATION_ERROR' },
-          globalOpts,
-        );
+
+      // Resolution order: --api-key global flag > EMAILBISON_API_KEY env > interactive prompt
+      let apiKey = globalOpts.apiKey ?? process.env.EMAILBISON_API_KEY;
+      let baseUrl = globalOpts.baseUrl ?? process.env.EMAILBISON_BASE_URL;
+
+      if (!apiKey) {
+        const rl = createInterface({ input: process.stdin, output: process.stderr });
+        apiKey = (await rl.question('EmailBison API key: ')).trim();
+        if (!baseUrl) {
+          const inputUrl = (await rl.question('Base URL [https://send.topoffunnel.com]: ')).trim();
+          if (inputUrl) baseUrl = inputUrl;
+        }
+        rl.close();
+      }
+
+      if (!apiKey) {
+        outputError({ error: 'No API key provided.', code: 'VALIDATION_ERROR' }, globalOpts);
         return;
       }
-      const config: Record<string, string> = { api_key: globalOpts.apiKey };
-      if (globalOpts.baseUrl) config.base_url = globalOpts.baseUrl;
+
+      const config: Record<string, string> = { api_key: apiKey };
+      if (baseUrl) config.base_url = baseUrl;
       saveConfig(config);
       output({ success: true, message: 'Credentials saved.', config_path: getConfigPath() }, globalOpts);
     });
@@ -202,8 +213,20 @@ function registerCommand(parent: Command, cmdDef: CommandDefinition, program: Co
 
       const cmdOpts = actionArgs[actionArgs.length - 2] as Record<string, unknown>;
       if (cmdOpts && typeof cmdOpts === 'object') {
-        for (const [key, val] of Object.entries(cmdOpts)) {
-          if (val !== undefined) input[key] = val;
+        // Use cliMappings to map Commander's camelCase keys back to schema field names.
+        // --some-flag becomes someFlag in Commander; we need to put it back as some_flag (the schema key).
+        if (cmdDef.cliMappings.options) {
+          for (const optDef of cmdDef.cliMappings.options) {
+            const flagName = optDef.flags.match(/--([a-zA-Z0-9][a-zA-Z0-9-_]*)/)?.[1] ?? optDef.field;
+            // Commander converts hyphens to camelCase; underscores stay as-is
+            const commanderKey = flagName.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+            const value = cmdOpts[commanderKey] ?? cmdOpts[flagName] ?? cmdOpts[optDef.field];
+            if (value !== undefined) input[optDef.field] = value;
+          }
+        } else {
+          for (const [key, val] of Object.entries(cmdOpts)) {
+            if (val !== undefined) input[key] = val;
+          }
         }
       }
 

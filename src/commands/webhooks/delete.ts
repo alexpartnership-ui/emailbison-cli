@@ -7,13 +7,13 @@ export const webhooksDeleteCommand: CommandDefinition = {
   group: 'webhooks',
   subcommand: 'delete',
   description: 'Delete a webhook URL.',
-  examples: ['bison webhooks delete --webhook_url_id abc123'],
+  examples: ['bison webhooks delete --webhook-url_id abc123'],
   inputSchema: z.object({
     webhook_url_id: z.string().describe('Webhook URL ID to delete'),
   }),
   cliMappings: {
     options: [
-      { field: 'webhook_url_id', flags: '--webhook_url_id <string>', description: 'Webhook URL ID' },
+      { field: 'webhook_url_id', flags: '--webhook-url-id <string>', description: 'Webhook URL ID' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/webhook-url/{webhook_url_id}' },

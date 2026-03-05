@@ -7,15 +7,15 @@ export const webhookEventsTestCommand: CommandDefinition = {
   group: 'webhook-events',
   subcommand: 'test',
   description: 'Send a test webhook event to a webhook URL.',
-  examples: ['bison webhook-events test --webhook_url_id abc123 --event_type reply'],
+  examples: ['bison webhook-events test --webhook-url_id abc123 --event-type reply'],
   inputSchema: z.object({
     webhook_url_id: z.string().describe('Webhook URL ID to send the test event to'),
     event_type: z.string().describe('Type of event to simulate'),
   }),
   cliMappings: {
     options: [
-      { field: 'webhook_url_id', flags: '--webhook_url_id <string>', description: 'Webhook URL ID' },
-      { field: 'event_type', flags: '--event_type <string>', description: 'Event type to simulate' },
+      { field: 'webhook_url_id', flags: '--webhook-url-id <string>', description: 'Webhook URL ID' },
+      { field: 'event_type', flags: '--event-type <string>', description: 'Event type to simulate' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/webhook-events/test-event' },

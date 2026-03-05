@@ -7,14 +7,14 @@ export const workspacesV11CreateApiTokenCommand: CommandDefinition = {
   group: 'workspaces-v1.1',
   subcommand: 'create-api-token',
   description: 'Create an API token for a workspace (v1.1).',
-  examples: ['bison workspaces-v1.1 create-api-token --team_id abc123 --name "My Token"'],
+  examples: ['bison workspaces-v1.1 create-api-token --team-id abc123 --name "My Token"'],
   inputSchema: z.object({
     team_id: z.string().describe('Team/workspace ID'),
     name: z.string().describe('API token name'),
   }),
   cliMappings: {
     options: [
-      { field: 'team_id', flags: '--team_id <string>', description: 'Team/workspace ID' },
+      { field: 'team_id', flags: '--team-id <string>', description: 'Team/workspace ID' },
       { field: 'name', flags: '--name <string>', description: 'API token name' },
     ],
   },

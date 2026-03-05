@@ -7,13 +7,13 @@ export const campaignsDeleteCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'delete',
   description: 'Delete a campaign.',
-  examples: ['bison campaigns delete --campaign_id abc123'],
+  examples: ['bison campaigns delete --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID to delete'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID to delete' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID to delete' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/campaigns/{campaign_id}' },

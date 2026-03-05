@@ -7,13 +7,13 @@ export const workspacesRemoveMemberCommand: CommandDefinition = {
   group: 'workspaces',
   subcommand: 'remove-member',
   description: 'Remove a member from a workspace (v1, deprecated).',
-  examples: ['bison workspaces remove-member --user_id abc123'],
+  examples: ['bison workspaces remove-member --user-id abc123'],
   inputSchema: z.object({
     user_id: z.string().describe('User ID to remove'),
   }),
   cliMappings: {
     options: [
-      { field: 'user_id', flags: '--user_id <string>', description: 'User ID to remove' },
+      { field: 'user_id', flags: '--user-id <string>', description: 'User ID to remove' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/workspaces/members/{user_id}' },

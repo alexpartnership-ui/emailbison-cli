@@ -7,13 +7,13 @@ export const workspacesV11DeleteCommand: CommandDefinition = {
   group: 'workspaces-v1.1',
   subcommand: 'delete',
   description: 'Delete a workspace (v1.1).',
-  examples: ['bison workspaces-v1.1 delete --team_id abc123'],
+  examples: ['bison workspaces-v1.1 delete --team-id abc123'],
   inputSchema: z.object({
     team_id: z.string().describe('Team/workspace ID to delete'),
   }),
   cliMappings: {
     options: [
-      { field: 'team_id', flags: '--team_id <string>', description: 'Team/workspace ID to delete' },
+      { field: 'team_id', flags: '--team-id <string>', description: 'Team/workspace ID to delete' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/workspaces/v1.1/{team_id}' },

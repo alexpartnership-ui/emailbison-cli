@@ -7,13 +7,13 @@ export const campaignsLineAreaChartStatsCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'line-area-chart-stats',
   description: 'Get line/area chart statistics for a campaign.',
-  examples: ['bison campaigns line-area-chart-stats --campaign_id abc123'],
+  examples: ['bison campaigns line-area-chart-stats --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/campaigns/{campaign_id}/line-area-chart-stats' },

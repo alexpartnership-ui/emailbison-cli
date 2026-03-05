@@ -7,13 +7,13 @@ export const workspacesV11GetCommand: CommandDefinition = {
   group: 'workspaces-v1.1',
   subcommand: 'get',
   description: 'Get a specific workspace by team ID (v1.1).',
-  examples: ['bison workspaces-v1.1 get --team_id abc123'],
+  examples: ['bison workspaces-v1.1 get --team-id abc123'],
   inputSchema: z.object({
     team_id: z.string().describe('Team/workspace ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'team_id', flags: '--team_id <string>', description: 'Team/workspace ID' },
+      { field: 'team_id', flags: '--team-id <string>', description: 'Team/workspace ID' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/workspaces/v1.1/{team_id}' },

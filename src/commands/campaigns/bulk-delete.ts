@@ -7,13 +7,13 @@ export const campaignsBulkDeleteCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'bulk-delete',
   description: 'Delete multiple campaigns at once.',
-  examples: ['bison campaigns bulk-delete --campaign_ids "id1,id2,id3"'],
+  examples: ['bison campaigns bulk-delete --campaign-ids "id1,id2,id3"'],
   inputSchema: z.object({
     campaign_ids: z.string().describe('Comma-separated campaign IDs to delete'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_ids', flags: '--campaign_ids <string>', description: 'Comma-separated campaign IDs' },
+      { field: 'campaign_ids', flags: '--campaign-ids <string>', description: 'Comma-separated campaign IDs' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/campaigns/bulk' },

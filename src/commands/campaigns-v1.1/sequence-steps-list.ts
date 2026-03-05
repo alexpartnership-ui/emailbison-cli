@@ -7,13 +7,13 @@ export const campaignsV11SequenceStepsListCommand: CommandDefinition = {
   group: 'campaigns-v1.1',
   subcommand: 'sequence-steps-list',
   description: 'List sequence steps for a campaign (v1.1).',
-  examples: ['bison campaigns-v1.1 sequence-steps-list --campaign_id abc123'],
+  examples: ['bison campaigns-v1.1 sequence-steps-list --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/campaigns/v1.1/{campaign_id}/sequence-steps' },

@@ -7,15 +7,15 @@ export const tagsAttachToSenderEmailsCommand: CommandDefinition = {
   group: 'tags',
   subcommand: 'attach-to-sender-emails',
   description: 'Attach tags to sender email accounts.',
-  examples: ['bison tags attach-to-sender-emails --tag_ids \'["tag1"]\' --sender_email_ids \'["acc1"]\''],
+  examples: ['bison tags attach-to-sender-emails --tag-ids \'["tag1"]\' --sender-email_ids \'["acc1"]\''],
   inputSchema: z.object({
     tag_ids: z.string().describe('JSON string array of tag IDs'),
     sender_email_ids: z.string().describe('JSON string array of sender email IDs'),
   }),
   cliMappings: {
     options: [
-      { field: 'tag_ids', flags: '--tag_ids <string>', description: 'JSON string array of tag IDs' },
-      { field: 'sender_email_ids', flags: '--sender_email_ids <string>', description: 'JSON string array of sender email IDs' },
+      { field: 'tag_ids', flags: '--tag-ids <string>', description: 'JSON string array of tag IDs' },
+      { field: 'sender_email_ids', flags: '--sender-email-ids <string>', description: 'JSON string array of sender email IDs' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/tags/attach-to-sender-emails' },

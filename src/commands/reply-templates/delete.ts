@@ -7,13 +7,13 @@ export const replyTemplatesDeleteCommand: CommandDefinition = {
   group: 'reply-templates',
   subcommand: 'delete',
   description: 'Delete a reply template.',
-  examples: ['bison reply-templates delete --reply_template_id abc123'],
+  examples: ['bison reply-templates delete --reply-template_id abc123'],
   inputSchema: z.object({
     reply_template_id: z.string().describe('Reply template ID to delete'),
   }),
   cliMappings: {
     options: [
-      { field: 'reply_template_id', flags: '--reply_template_id <string>', description: 'Reply template ID' },
+      { field: 'reply_template_id', flags: '--reply-template-id <string>', description: 'Reply template ID' },
     ],
   },
   endpoint: { method: 'DELETE', path: '/api/reply-templates/{reply_template_id}' },

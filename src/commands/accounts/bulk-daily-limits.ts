@@ -7,15 +7,15 @@ export const accountsBulkDailyLimitsCommand: CommandDefinition = {
   group: 'accounts',
   subcommand: 'bulk-daily-limits',
   description: 'Bulk update daily sending limits for multiple sender email accounts.',
-  examples: ['bison accounts bulk-daily-limits --sender_email_ids \'["id1","id2"]\' --daily_limit 50'],
+  examples: ['bison accounts bulk-daily-limits --sender-email_ids \'["id1","id2"]\' --daily-limit 50'],
   inputSchema: z.object({
     sender_email_ids: z.string().describe('JSON string array of sender email IDs'),
     daily_limit: z.coerce.number().describe('Daily sending limit to apply'),
   }),
   cliMappings: {
     options: [
-      { field: 'sender_email_ids', flags: '--sender_email_ids <string>', description: 'JSON string array of sender email IDs' },
-      { field: 'daily_limit', flags: '--daily_limit <number>', description: 'Daily sending limit to apply' },
+      { field: 'sender_email_ids', flags: '--sender-email-ids <string>', description: 'JSON string array of sender email IDs' },
+      { field: 'daily_limit', flags: '--daily-limit <number>', description: 'Daily sending limit to apply' },
     ],
   },
   endpoint: { method: 'PATCH', path: '/api/sender-emails/daily-limits/bulk' },

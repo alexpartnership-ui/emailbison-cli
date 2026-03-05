@@ -7,13 +7,13 @@ export const workspacesV11SwitchCommand: CommandDefinition = {
   group: 'workspaces-v1.1',
   subcommand: 'switch',
   description: 'Switch to a different workspace (v1.1).',
-  examples: ['bison workspaces-v1.1 switch --team_id abc123'],
+  examples: ['bison workspaces-v1.1 switch --team-id abc123'],
   inputSchema: z.object({
     team_id: z.string().describe('Team/workspace ID to switch to'),
   }),
   cliMappings: {
     options: [
-      { field: 'team_id', flags: '--team_id <string>', description: 'Team/workspace ID to switch to' },
+      { field: 'team_id', flags: '--team-id <string>', description: 'Team/workspace ID to switch to' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/workspaces/v1.1/switch-workspace' },

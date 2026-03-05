@@ -20,10 +20,10 @@ export const campaignEventsStatsCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
-      { field: 'sender_email_id', flags: '--sender_email_id <string>', description: 'Sender email ID' },
-      { field: 'start_date', flags: '--start_date <string>', description: 'Start date (YYYY-MM-DD)' },
-      { field: 'end_date', flags: '--end_date <string>', description: 'End date (YYYY-MM-DD)' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
+      { field: 'sender_email_id', flags: '--sender-email-id <string>', description: 'Sender email ID' },
+      { field: 'start_date', flags: '--start-date <string>', description: 'Start date (YYYY-MM-DD)' },
+      { field: 'end_date', flags: '--end-date <string>', description: 'End date (YYYY-MM-DD)' },
       { field: 'page', flags: '--page <number>', description: 'Page number' },
     ],
   },

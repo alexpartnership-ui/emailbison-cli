@@ -7,13 +7,13 @@ export const campaignsDuplicateCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'duplicate',
   description: 'Duplicate an existing campaign.',
-  examples: ['bison campaigns duplicate --campaign_id abc123'],
+  examples: ['bison campaigns duplicate --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID to duplicate'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID to duplicate' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID to duplicate' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/campaigns/{campaign_id}/duplicate' },

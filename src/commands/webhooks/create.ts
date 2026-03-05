@@ -7,7 +7,7 @@ export const webhooksCreateCommand: CommandDefinition = {
   group: 'webhooks',
   subcommand: 'create',
   description: 'Create a new webhook URL.',
-  examples: ['bison webhooks create --url https://example.com/hook', 'bison webhooks create --url https://example.com/hook --event_types \'["reply","bounce"]\''],
+  examples: ['bison webhooks create --url https://example.com/hook', 'bison webhooks create --url https://example.com/hook --event-types \'["reply","bounce"]\''],
   inputSchema: z.object({
     url: z.string().describe('Webhook endpoint URL'),
     event_types: z.string().optional().describe('JSON string of event types to subscribe to'),
@@ -15,7 +15,7 @@ export const webhooksCreateCommand: CommandDefinition = {
   cliMappings: {
     options: [
       { field: 'url', flags: '--url <string>', description: 'Webhook endpoint URL' },
-      { field: 'event_types', flags: '--event_types <string>', description: 'JSON string of event types' },
+      { field: 'event_types', flags: '--event-types <string>', description: 'JSON string of event types' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/webhook-url' },

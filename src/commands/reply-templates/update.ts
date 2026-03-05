@@ -18,8 +18,8 @@ export const replyTemplatesUpdateCommand: CommandDefinition = {
     options: [
       { field: 'id', flags: '--id <string>', description: 'Reply template ID' },
       { field: 'name', flags: '--name <string>', description: 'Template name' },
-      { field: 'body_text', flags: '--body_text <string>', description: 'Plain text body' },
-      { field: 'body_html', flags: '--body_html <string>', description: 'HTML body' },
+      { field: 'body_text', flags: '--body-text <string>', description: 'Plain text body' },
+      { field: 'body_html', flags: '--body-html <string>', description: 'HTML body' },
     ],
   },
   endpoint: { method: 'PUT', path: '/api/reply-templates/{id}' },

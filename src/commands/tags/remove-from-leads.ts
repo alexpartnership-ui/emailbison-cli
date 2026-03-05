@@ -7,15 +7,15 @@ export const tagsRemoveFromLeadsCommand: CommandDefinition = {
   group: 'tags',
   subcommand: 'remove-from-leads',
   description: 'Remove tags from leads.',
-  examples: ['bison tags remove-from-leads --tag_ids \'["tag1"]\' --lead_ids \'["lead1"]\''],
+  examples: ['bison tags remove-from-leads --tag-ids \'["tag1"]\' --lead-ids \'["lead1"]\''],
   inputSchema: z.object({
     tag_ids: z.string().describe('JSON string array of tag IDs'),
     lead_ids: z.string().describe('JSON string array of lead IDs'),
   }),
   cliMappings: {
     options: [
-      { field: 'tag_ids', flags: '--tag_ids <string>', description: 'JSON string array of tag IDs' },
-      { field: 'lead_ids', flags: '--lead_ids <string>', description: 'JSON string array of lead IDs' },
+      { field: 'tag_ids', flags: '--tag-ids <string>', description: 'JSON string array of tag IDs' },
+      { field: 'lead_ids', flags: '--lead-ids <string>', description: 'JSON string array of lead IDs' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/tags/remove-from-leads' },

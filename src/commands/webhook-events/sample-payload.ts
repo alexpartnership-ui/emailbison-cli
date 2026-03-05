@@ -7,13 +7,13 @@ export const webhookEventsSamplePayloadCommand: CommandDefinition = {
   group: 'webhook-events',
   subcommand: 'sample-payload',
   description: 'Get a sample payload for a webhook event type.',
-  examples: ['bison webhook-events sample-payload', 'bison webhook-events sample-payload --event_type reply'],
+  examples: ['bison webhook-events sample-payload', 'bison webhook-events sample-payload --event-type reply'],
   inputSchema: z.object({
     event_type: z.string().optional().describe('Event type to get sample payload for'),
   }),
   cliMappings: {
     options: [
-      { field: 'event_type', flags: '--event_type <string>', description: 'Event type' },
+      { field: 'event_type', flags: '--event-type <string>', description: 'Event type' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/webhook-events/sample-payload' },

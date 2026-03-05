@@ -7,13 +7,13 @@ export const campaignsResumeCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'resume',
   description: 'Resume a paused campaign.',
-  examples: ['bison campaigns resume --campaign_id abc123'],
+  examples: ['bison campaigns resume --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID to resume'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID to resume' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID to resume' },
     ],
   },
   endpoint: { method: 'PATCH', path: '/api/campaigns/{campaign_id}/resume' },

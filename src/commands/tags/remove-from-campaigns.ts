@@ -7,15 +7,15 @@ export const tagsRemoveFromCampaignsCommand: CommandDefinition = {
   group: 'tags',
   subcommand: 'remove-from-campaigns',
   description: 'Remove tags from campaigns.',
-  examples: ['bison tags remove-from-campaigns --tag_ids \'["tag1"]\' --campaign_ids \'["camp1"]\''],
+  examples: ['bison tags remove-from-campaigns --tag-ids \'["tag1"]\' --campaign-ids \'["camp1"]\''],
   inputSchema: z.object({
     tag_ids: z.string().describe('JSON string array of tag IDs'),
     campaign_ids: z.string().describe('JSON string array of campaign IDs'),
   }),
   cliMappings: {
     options: [
-      { field: 'tag_ids', flags: '--tag_ids <string>', description: 'JSON string array of tag IDs' },
-      { field: 'campaign_ids', flags: '--campaign_ids <string>', description: 'JSON string array of campaign IDs' },
+      { field: 'tag_ids', flags: '--tag-ids <string>', description: 'JSON string array of tag IDs' },
+      { field: 'campaign_ids', flags: '--campaign-ids <string>', description: 'JSON string array of campaign IDs' },
     ],
   },
   endpoint: { method: 'POST', path: '/api/tags/remove-from-campaigns' },

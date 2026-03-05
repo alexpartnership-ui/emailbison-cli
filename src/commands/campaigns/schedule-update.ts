@@ -7,7 +7,7 @@ export const campaignsScheduleUpdateCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'schedule-update',
   description: 'Update the schedule for a campaign.',
-  examples: ['bison campaigns schedule-update --campaign_id abc123 --start_time "08:00" --end_time "18:00"'],
+  examples: ['bison campaigns schedule-update --campaign-id abc123 --start-time "08:00" --end-time "18:00"'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID'),
     monday: z.boolean().optional().describe('Enable Monday'),
@@ -24,7 +24,7 @@ export const campaignsScheduleUpdateCommand: CommandDefinition = {
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID' },
       { field: 'monday', flags: '--monday', description: 'Enable Monday' },
       { field: 'tuesday', flags: '--tuesday', description: 'Enable Tuesday' },
       { field: 'wednesday', flags: '--wednesday', description: 'Enable Wednesday' },
@@ -32,10 +32,10 @@ export const campaignsScheduleUpdateCommand: CommandDefinition = {
       { field: 'friday', flags: '--friday', description: 'Enable Friday' },
       { field: 'saturday', flags: '--saturday', description: 'Enable Saturday' },
       { field: 'sunday', flags: '--sunday', description: 'Enable Sunday' },
-      { field: 'start_time', flags: '--start_time <string>', description: 'Start time' },
-      { field: 'end_time', flags: '--end_time <string>', description: 'End time' },
+      { field: 'start_time', flags: '--start-time <string>', description: 'Start time' },
+      { field: 'end_time', flags: '--end-time <string>', description: 'End time' },
       { field: 'timezone', flags: '--timezone <string>', description: 'Timezone' },
-      { field: 'save_as_template', flags: '--save_as_template', description: 'Save as template' },
+      { field: 'save_as_template', flags: '--save-as-template', description: 'Save as template' },
     ],
   },
   endpoint: { method: 'PUT', path: '/api/campaigns/{campaign_id}/schedule' },

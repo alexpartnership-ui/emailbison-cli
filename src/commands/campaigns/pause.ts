@@ -7,13 +7,13 @@ export const campaignsPauseCommand: CommandDefinition = {
   group: 'campaigns',
   subcommand: 'pause',
   description: 'Pause a running campaign.',
-  examples: ['bison campaigns pause --campaign_id abc123'],
+  examples: ['bison campaigns pause --campaign-id abc123'],
   inputSchema: z.object({
     campaign_id: z.string().describe('Campaign ID to pause'),
   }),
   cliMappings: {
     options: [
-      { field: 'campaign_id', flags: '--campaign_id <string>', description: 'Campaign ID to pause' },
+      { field: 'campaign_id', flags: '--campaign-id <string>', description: 'Campaign ID to pause' },
     ],
   },
   endpoint: { method: 'PATCH', path: '/api/campaigns/{campaign_id}/pause' },
