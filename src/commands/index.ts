@@ -64,13 +64,21 @@ function getGlobalOpts(program: Command): GlobalOptions {
 function registerLoginCommand(program: Command): void {
   program
     .command('login')
-    .description('Save your API key and base URL to ~/.emailbison/config.json')
-    .requiredOption('--api-key <key>', 'Your EmailBison API key')
-    .option('--base-url <url>', 'Your EmailBison instance URL (default: https://send.topoffunnel.com)')
-    .action(async (opts) => {
+    .description(
+      'Save your API key and base URL to ~/.emailbison/config.json. ' +
+      'Pass --api-key and --base-url as global options before "login".',
+    )
+    .action(async () => {
       const globalOpts = getGlobalOpts(program);
-      const config: Record<string, string> = { api_key: opts.apiKey };
-      if (opts.baseUrl) config.base_url = opts.baseUrl;
+      if (!globalOpts.apiKey) {
+        outputError(
+          { error: 'No API key provided. Use: bison --api-key <key> login', code: 'VALIDATION_ERROR' },
+          globalOpts,
+        );
+        return;
+      }
+      const config: Record<string, string> = { api_key: globalOpts.apiKey };
+      if (globalOpts.baseUrl) config.base_url = globalOpts.baseUrl;
       saveConfig(config);
       output({ success: true, message: 'Credentials saved.', config_path: getConfigPath() }, globalOpts);
     });

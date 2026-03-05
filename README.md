@@ -42,8 +42,18 @@ npm install -g emailbison-cli
 
 Get your API key from your EmailBison dashboard (Settings → Developer API → New API Token).
 
+Pass `--api-key` and `--base-url` as **global** options (before `login`):
+
 ```bash
-bison login --api-key <your-api-key> --base-url https://send.topoffunnel.com
+bison --api-key '25|abc...' --base-url 'https://send.topoffunnel.com' login
+```
+
+Or use environment variables (works with any key format including `|`):
+
+```bash
+export EMAILBISON_API_KEY='25|abc...'
+export EMAILBISON_BASE_URL='https://send.topoffunnel.com'
+bison login
 ```
 
 The base URL is your EmailBison instance URL. Each deployment has its own URL.
@@ -116,7 +126,7 @@ bison replies list --pretty
 ### Auth & Config
 
 ```
-bison login --api-key <key> [--base-url <url>]
+bison --api-key <key> [--base-url <url>] login
 bison logout
 bison status
 bison config set [--api-key <key>] [--base-url <url>]

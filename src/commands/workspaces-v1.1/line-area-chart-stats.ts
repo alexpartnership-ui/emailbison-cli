@@ -1,21 +1,33 @@
 import { z } from 'zod';
-import type { CommandDefinition } from '../../core/types.js';
-import { executeCommand } from '../../core/handler.js';
+import type { CommandDefinition, BisonClient } from '../../core/types.js';
+
+function defaultStartDate(): string {
+  const d = new Date();
+  d.setDate(d.getDate() - 30);
+  return d.toISOString().split('T')[0];
+}
+
+function defaultEndDate(): string {
+  return new Date().toISOString().split('T')[0];
+}
 
 export const workspacesV11LineAreaChartStatsCommand: CommandDefinition = {
   name: 'workspaces-v1.1_line-area-chart-stats',
   group: 'workspaces-v1.1',
   subcommand: 'line-area-chart-stats',
-  description: 'Get workspace line/area chart statistics (v1.1).',
-  examples: ['bison workspaces-v1.1 line-area-chart-stats --start_date 2025-01-01 --end_date 2025-12-31'],
+  description: 'Get workspace line/area chart statistics (v1.1). Defaults to the last 30 days when no dates are provided.',
+  examples: [
+    'bison workspaces-v1.1 line-area-chart-stats',
+    'bison workspaces-v1.1 line-area-chart-stats --start-date 2025-01-01 --end-date 2025-03-31',
+  ],
   inputSchema: z.object({
-    start_date: z.string().optional().describe('Start date for stats range'),
-    end_date: z.string().optional().describe('End date for stats range'),
+    start_date: z.string().optional().describe('Start date (YYYY-MM-DD). Defaults to 30 days ago.'),
+    end_date: z.string().optional().describe('End date (YYYY-MM-DD). Defaults to today.'),
   }),
   cliMappings: {
     options: [
-      { field: 'start_date', flags: '--start_date <string>', description: 'Start date for stats range' },
-      { field: 'end_date', flags: '--end_date <string>', description: 'End date for stats range' },
+      { field: 'start_date', flags: '--start-date <string>', description: 'Start date YYYY-MM-DD (default: 30 days ago)' },
+      { field: 'end_date', flags: '--end-date <string>', description: 'End date YYYY-MM-DD (default: today)' },
     ],
   },
   endpoint: { method: 'GET', path: '/api/workspaces/v1.1/line-area-chart-stats' },
@@ -23,5 +35,14 @@ export const workspacesV11LineAreaChartStatsCommand: CommandDefinition = {
     start_date: 'query',
     end_date: 'query',
   },
-  handler: (input, client) => executeCommand(workspacesV11LineAreaChartStatsCommand, input, client),
+  handler: async (input: { start_date?: string; end_date?: string }, client: BisonClient) => {
+    return client.request({
+      method: 'GET',
+      path: '/api/workspaces/v1.1/line-area-chart-stats',
+      query: {
+        start_date: input.start_date ?? defaultStartDate(),
+        end_date: input.end_date ?? defaultEndDate(),
+      },
+    });
+  },
 };
