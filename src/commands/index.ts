@@ -1,6 +1,6 @@
 import { createInterface } from 'node:readline/promises';
 import { Command } from 'commander';
-import type { CommandDefinition, GlobalOptions } from '../core/types.js';
+import type { BisonRequestOptions, CommandDefinition, GlobalOptions } from '../core/types.js';
 import { resolveAuth } from '../core/auth.js';
 import { createClient } from '../core/client.js';
 import { saveConfig, deleteConfig, loadConfig, getConfigPath } from '../core/config.js';
@@ -59,6 +59,8 @@ function getGlobalOpts(program: Command): GlobalOptions {
     fields: opts.fields,
     apiKey: opts.apiKey,
     baseUrl: opts.baseUrl,
+    all: opts.all,
+    maxPages: opts.maxPages,
   };
 }
 
@@ -212,7 +214,17 @@ function registerCommand(parent: Command, cmdDef: CommandDefinition, program: Co
 
     try {
       const auth = resolveAuth({ apiKey: globalOpts.apiKey, baseUrl: globalOpts.baseUrl });
-      const client = createClient(auth);
+      const baseClient = createClient(auth);
+
+      // --all: route paginated GET list commands through client.paginate so every
+      // page is fetched and merged. Only applies to commands with a `page` query field.
+      const canPaginate =
+        cmdDef.endpoint.method === 'GET' && cmdDef.fieldMappings.page === 'query';
+      const maxPages = globalOpts.maxPages ? Number(globalOpts.maxPages) : undefined;
+      const client =
+        globalOpts.all && canPaginate
+          ? { ...baseClient, request: (o: BisonRequestOptions) => baseClient.paginate(o, maxPages) }
+          : baseClient;
 
       const input: Record<string, unknown> = {};
 

@@ -82,12 +82,15 @@ export function createClient(auth: AuthContext): BisonClient {
     throw lastError ?? new Error('Request failed after retries');
   }
 
-  async function paginate(opts: BisonRequestOptions, maxPages = 10): Promise<unknown> {
+  async function paginate(opts: BisonRequestOptions, maxPages = 50): Promise<unknown> {
     const allData: unknown[] = [];
     let currentPage = 1;
+    let truncated = false;
+    let total: number | undefined;
 
-    for (let i = 0; i < maxPages; i++) {
-      const query = { ...opts.query, page: currentPage };
+    for (;;) {
+      // per_page is a request; instances may ignore or cap it. Explicit query value wins.
+      const query = { per_page: 100, ...opts.query, page: currentPage };
       const result = (await request({ ...opts, query })) as Record<string, unknown>;
 
       if (Array.isArray(result?.data)) {
@@ -97,12 +100,20 @@ export function createClient(auth: AuthContext): BisonClient {
       }
 
       const meta = result?.meta as Record<string, number> | undefined;
+      if (meta?.total !== undefined) total = meta.total;
       if (!meta || currentPage >= (meta.last_page ?? currentPage)) break;
+      if (currentPage >= maxPages) {
+        truncated = true;
+        break;
+      }
 
       currentPage++;
     }
 
-    return { data: allData };
+    const out: Record<string, unknown> = { data: allData, pages_fetched: currentPage };
+    if (total !== undefined) out.total = total;
+    if (truncated) out.truncated = true;
+    return out;
   }
 
   return { request, paginate };

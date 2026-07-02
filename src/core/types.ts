@@ -52,4 +52,6 @@ export interface GlobalOptions {
   fields?: string;
   apiKey?: string;
   baseUrl?: string;
+  all?: boolean;
+  maxPages?: string;
 }

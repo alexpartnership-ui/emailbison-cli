@@ -13,7 +13,9 @@ program
   .option('--quiet', 'Suppress output, exit codes only')
   .option('--fields <fields>', 'Comma-separated fields to include in output')
   .option('--api-key <key>', 'EmailBison API key')
-  .option('--base-url <url>', 'EmailBison instance base URL');
+  .option('--base-url <url>', 'EmailBison instance base URL')
+  .option('--all', 'Auto-paginate list commands: fetch every page and merge data')
+  .option('--max-pages <n>', 'Page cap when using --all (default 50)');
 
 registerAllCommands(program);
 
